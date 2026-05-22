@@ -4,8 +4,8 @@ import redis
 import os
 
 app = Flask(__name__)
-redis_host = os.getenv("REDIS_HOST", "localhost")
-cache = redis.Redis(host=redis_host, port=6379, decode_responses=True)
+redis_url = os.getenv("REDIS_URL", "redis://localhost:6379")
+cache = redis.from_url(redis_url, decode_responses=True)
 
 @app.route("/")
 def home():
