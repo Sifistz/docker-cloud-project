@@ -1,0 +1,6 @@
+Method 1 - Docker only:
+response_time = 1.0 sec
+
+Method 2 - Docker Compose + Redis:
+cache miss = περίπου 1.013 sec
+cache hit = περίπου 0.003 sec

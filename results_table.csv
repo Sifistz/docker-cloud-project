@@ -1,0 +1,4 @@
+Method,Case,Response Time
+Method1,No cache,1.013
+Method2,Cache miss,1.013
+Method2,Cache hit,0.003
