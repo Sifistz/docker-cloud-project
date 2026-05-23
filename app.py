@@ -12,32 +12,37 @@ cache = redis.from_url(redis_url, decode_responses=True)
 
 
 def process_dataset():
-    total = 0
-    survived = 0
-    total_age = 0
-    age_count = 0
-    total_fare = 0
+    final_result = None
 
-    with open("data.csv", newline="", encoding="utf-8") as file:
-        reader = csv.DictReader(file)
+    for _ in range(1000):
+        total = 0
+        survived = 0
+        total_age = 0
+        age_count = 0
+        total_fare = 0
 
-        for row in reader:
-            total += 1
-            survived += int(row["Survived"])
+        with open("data.csv", newline="", encoding="utf-8") as file:
+            reader = csv.DictReader(file)
 
-            if row["Age"]:
-                total_age += float(row["Age"])
-                age_count += 1
+            for row in reader:
+                total += 1
+                survived += int(row["Survived"])
 
-            if row["Fare"]:
-                total_fare += float(row["Fare"])
+                if row["Age"]:
+                    total_age += float(row["Age"])
+                    age_count += 1
 
-    return {
-        "total_passengers": total,
-        "survived_passengers": survived,
-        "average_age": round(total_age / age_count, 2),
-        "average_fare": round(total_fare / total, 2)
-    }
+                if row["Fare"]:
+                    total_fare += float(row["Fare"])
+
+        final_result = {
+            "total_passengers": total,
+            "survived_passengers": survived,
+            "average_age": round(total_age / age_count, 2),
+            "average_fare": round(total_fare / total, 2)
+        }
+
+    return final_result
 
 
 @app.route("/")
