@@ -47,6 +47,12 @@ def home():
         "status": "running"
     })
 
+@app.route("/clear-cache")
+def clear_cache():
+    cache.delete("titanic_result")
+    return jsonify({
+        "message": "cache cleared successfully"
+    })
 
 @app.route("/method1")
 def method1():
